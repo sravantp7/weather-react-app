@@ -1,15 +1,35 @@
-This repository is using ReactJS, TypeScript and TailwindCSS. It also runs on node 18 (see .nvmrc) and has a formatter - prettier. If you're running this for the first time - please ensure you have nvm (node version manager).
+# React + TypeScript Weather APP
+---
+<div>
+<b>Quick menu:</b>
+<a href="https://openweathermap.org/api" target="_blank" rel="noopener"
+    style="padding:0.35rem 0.7rem;
+    color: black;
+    background: #F1DEDE;
+    border-radius:10px;
+    font-size:0.85rem;
+    font-weight:600;">Official API Docs</a>
+</div>
 
-## How To Run
+---
 
-If you don't have nvm installed, run the following command:
-`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash`
-After you got nvm installed on your machine, run `nvm i` and then `nvm use` (to have the correct nodeJs version)
+## Description
+<p>Weather application using Reactjs, Typescript, Tailwind & Weather API.</p>
 
-Once you have the correct node version, run `npm i` to get all the required dependencies installed
+### Tech stack
+```
+Core:
+- ReactJS
+- TypeScript
+- TailwindCSS
 
-After everything is installed, run `npm run start` and navigate to http://localhost:3000
+Communication tool:
+- fetch
+```
 
-## API Calls
-
-Please Note: The OpenWeather API is using an API Key. In the repository you fill find a `.env.example` file which you need to copy/save as `.env` and paste the value of your API key (which you can get when you register on the OpenWeather API website).
+### Outcome
+```
+1. Leant to configure Typescript with Reactjs.
+2. Fetch data using API.
+3. Leant to setup and use Tailwind with React projects
+```
