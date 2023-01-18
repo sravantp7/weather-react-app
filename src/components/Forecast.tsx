@@ -1,11 +1,11 @@
 import { forecastType } from '../types';
 import Degree from './Degree';
+import Sunrise from './Icons/Sunrise';
+import Sunset from './Icons/Sunset';
+import { getSunTime, getWindDirection } from '../helper/index';
+import Tile from './Tile';
 
-type Props = {
-    data: forecastType
-}
-
-const Forecast = ({data}: Props): JSX.Element => {
+const Forecast = ({data}: {data: forecastType}): JSX.Element => {
   const today = data.list[0];
   return (
     <div className='w-full md:max-w-[500px] py-4 md:py-4 md:px-10 lg:px-24 h-full lg:h-auto bg-white bg-opacity-20 backdrop-blur-ls rounded drop-shadow-lg'>
@@ -27,9 +27,18 @@ const Forecast = ({data}: Props): JSX.Element => {
                         ))
                     }
                 </section>
-                <section className='flex justify-between text-zinc-700'>
-                    <div className='w-[140px] text-xs font-bold flex flex-col items-center bg-white/20 backdrop-blur-lg rounded drop-shadow-lg py-4 mb-5'></div>
-                    <div className='w-[140px] text-xs font-bold flex flex-col items-center bg-white/20 backdrop-blur-lg rounded drop-shadow-lg py-4 mb-5'></div>
+                <section className='flex flex-wrap justify-between text-zinc-700'>
+                    <div className='w-[145px] text-xs font-bold flex flex-col items-center bg-white/20 backdrop-blur-lg rounded drop-shadow-lg py-4 mb-5'>
+                        <Sunrise />
+                        <p className='pt-2 font-bold'>{getSunTime(data.sunrise)}</p>
+                    </div>
+                    <div className='w-[145px] text-xs font-bold flex flex-col items-center bg-white/20 backdrop-blur-lg rounded drop-shadow-lg py-4 mb-5'>
+                        <Sunset />
+                        <p className='pt-2 font-bold'>{getSunTime(data.sunset)}</p>
+                    </div>
+                </section>
+                <section>
+                    <Tile icon='wind' title='Wind' info={`${Math.round(data.list[0].wind.speed)} km/h`} description={`${getWindDirection(data.list[0].wind.deg)}, gusts ${data.list[0].wind.gust.toFixed(1)} km/h`} />
                 </section>    
             </section>
         </div>
