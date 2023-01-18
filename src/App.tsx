@@ -4,6 +4,7 @@ import { optionType } from './types';
 const App = (): JSX.Element => {
   const [term, setTerm] = useState<string>('');
   const [options, setOptions] = useState<[]>([]);
+  const [city, setCity] = useState<optionType | null>(null);
 
   // Location API
   const fetchLoc = async (cityname: string) => {
@@ -24,15 +25,22 @@ const App = (): JSX.Element => {
     fetchLoc(value);
   }
 
-  // Weather API
   const onOptionSelect = (option: optionType) => {
+    setCity(option);
     setTerm(option.name + ', '+ option.country);
-    const fetchWeather = async (lat: number, lon: number) => {
-      const fetchRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_API_KEY}`);
+    setOptions([]); // Clearing options once location selected.
+  }
+
+  // Weather API
+  const fetchWeather = async (city: optionType) => {
+    try {
+      const fetchRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&appid=${process.env.REACT_APP_API_KEY}`);
       const weatherDet = await fetchRes.json();
       console.log(weatherDet);
     }
-    fetchWeather(option.lat, option.lon);
+    catch(error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -51,7 +59,12 @@ const App = (): JSX.Element => {
               ))
             }
           </ul>
-          <button className="rounded-r-md text-zinc-100 border-2 border-zinc-100 px-2 py-1 cursor-pointer hover:text-zinc-500">search</button>
+          <button className="rounded-r-md text-zinc-100 border-2 border-zinc-100 px-2 py-1 cursor-pointer hover:text-zinc-500" onClick={()=> {
+            if (!city) {
+              return;
+            }
+            fetchWeather(city);
+          }}>search</button>
         </div>
       </section>
     </main>
