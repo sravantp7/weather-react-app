@@ -14,7 +14,7 @@ const App = (): JSX.Element => {
   } = useForecast(); // Custom Hook
 
   return (
-    <main className="flex justify-center items-center bg-gradient-to-br from-sky-400 via-rose-400 to-lime-400 h-[100vh] w-full">
+    <main className="flex justify-center items-center bg-gradient-to-br from-sky-400 via-rose-400 to-lime-400 w-full">
       {
         !weather ? <Search term={term} city={city} options={options} onInputChange={onInputChange} onOptionSelect={onOptionSelect} fetchWeather={fetchWeather} /> : <Forecast data={weather} />
       }
