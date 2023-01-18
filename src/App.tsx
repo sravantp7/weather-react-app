@@ -1,5 +1,6 @@
 import Search from './components/Search';
-import useWeather from './hooks/useWeather';
+import useForecast from './hooks/useForecast';
+import Forecast from './components/Forecast';
 
 const App = (): JSX.Element => {
   const {
@@ -10,12 +11,12 @@ const App = (): JSX.Element => {
     onInputChange,
     onOptionSelect,
     fetchWeather
-  } = useWeather(); // Custom Hook
+  } = useForecast(); // Custom Hook
 
   return (
     <main className="flex justify-center items-center bg-gradient-to-br from-sky-400 via-rose-400 to-lime-400 h-[100vh] w-full">
       {
-        !weather ? <Search term={term} city={city} options={options} onInputChange={onInputChange} onOptionSelect={onOptionSelect} fetchWeather={fetchWeather} /> : <h1>{weather.id}</h1>
+        !weather ? <Search term={term} city={city} options={options} onInputChange={onInputChange} onOptionSelect={onOptionSelect} fetchWeather={fetchWeather} /> : <Forecast data={weather} />
       }
     </main>
   );

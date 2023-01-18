@@ -1,15 +1,12 @@
 import { optionType } from "../types";
 import { useState, ChangeEvent } from "react";
+import { forecastType } from "../types";
 
-type weatherType = {
-    id: number
-  }
-
-const useWeather = () => {
+const useForecast = () => {
     const [term, setTerm] = useState<string>('');
     const [options, setOptions] = useState<[]>([]);
     const [city, setCity] = useState<optionType | null>(null);
-    const [weather, setWeather] = useState<weatherType | null>(null);
+    const [weather, setWeather] = useState<forecastType | null>(null);
   
     // Location API
     const fetchLoc = async (cityname: string) => {
@@ -39,10 +36,13 @@ const useWeather = () => {
     // Weather API
     const fetchWeather = async (city: optionType) => {
       try {
-        const fetchRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&appid=${process.env.REACT_APP_API_KEY}`);
-        const weatherDetails = await fetchRes.json();
-        setWeather(weatherDetails);
-        console.log(weatherDetails);
+        const fetchRes = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${city.lat}&lon=${city.lon}&appid=${process.env.REACT_APP_API_KEY}`);
+        const forecastDetails = await fetchRes.json();
+        const forecastDet = {
+          ...forecastDetails.city,
+          list: forecastDetails.list.slice(0, 16),
+        }
+        setWeather(forecastDet);
       }
       catch(error) {
         console.error(error);
@@ -60,4 +60,4 @@ const useWeather = () => {
     }
 }
 
-export default useWeather;
+export default useForecast;

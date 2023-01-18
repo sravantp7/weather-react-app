@@ -18,7 +18,7 @@ const Search = ({term, city, options, onInputChange, onOptionSelect, fetchWeathe
         <h1 className="text-4xl font-thin">Weather <span className="font-black">Forecast</span></h1>
         <p className="text-sm mt-3 mb-5">Enter below a place you want to know the weather of and select an option from dropdown</p>
         <div className='relative flex mt-4 justify-center'>
-          <input type="text" value={term} onChange={onInputChange} className='px-2 py-1 rounded-l-md border-2 border-white outline-none text-black' />
+          <input type="text" placeholder='City Name Here' value={term} onChange={onInputChange} className='px-2 py-1 rounded-l-md border-2 border-white outline-none text-black' />
           <ul className='bg-white rounded-b-md top-9 absolute ml-1 left-16 sm:left-20 md:left-8'>
             {
               options.map((option: optionType, index: number) => (
